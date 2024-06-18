@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Augur Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .dashboard {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .distributor-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .distributor-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .distributor-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Augur Dashboard</h1>
+        <div class="distributor-cards" id="distributor-cards">
+            <!-- Distributor cards will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const mockData = [
+            {
+                name: 'Distributor A',
+                lastMonthShipped: 1200,
+                forecastedThisMonth: 1300,
+                ytdAverage: 1250,
+            },
+            {
+                name: 'Distributor B',
+                lastMonthShipped: 1500,
+                forecastedThisMonth: 1400,
+                ytdAverage: 1450,
+            },
+            // Add more mock data as needed
+        ];
+
+        function createDistributorCard(distributor) {
+            const card = document.createElement('div');
+            card.className = 'distributor-card';
+
+            const name = document.createElement('h2');
+            name.textContent = distributor.name;
+
+            const lastMonthShipped = document.createElement('p');
+            lastMonthShipped.textContent = `Last Month Shipped: ${distributor.lastMonthShipped}`;
+
+            const forecastedThisMonth = document.createElement('p');
+            forecastedThisMonth.textContent = `Forecasted This Month: ${distributor.forecastedThisMonth}`;
+
+            const ytdAverage = document.createElement('p');
+            ytdAverage.textContent = `YTD Average: ${distributor.ytdAverage}`;
+
+            card.appendChild(name);
+            card.appendChild(lastMonthShipped);
+            card.appendChild(forecastedThisMonth);
+            card.appendChild(ytdAverage);
+
+            return card;
+        }
+
+        function loadDistributors() {
+            const container = document.getElementById('distributor-cards');
+            mockData.forEach(distributor => {
+                const card = createDistributorCard(distributor);
+                container.appendChild(card);
+            });
+        }
+
+        window.onload = loadDistributors;
+    </script>
+</body>
+</html>
